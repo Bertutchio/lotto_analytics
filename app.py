@@ -40,7 +40,7 @@ def parse_line(line):
         elif col == 9:
             doc['number_of_winners'] = int(value)
         elif col == 10:
-            doc['amount'] = int(value.strip('EUR').replace(' ', ''))
+            doc['amount_won'] = int(value.strip('EUR').replace(' ', ''))
         col = col + 1
 
     return doc
@@ -88,6 +88,6 @@ for year in years:
 
         if line > 1 and len(td_list) > 1:
             doc = parse_line(td_list)
-            es.index(index='lotto', body=doc, doc_type='euromillions')
+            es.index(index='lotto', body=doc)
 
         line = line + 1
