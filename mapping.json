@@ -1,0 +1,34 @@
+{
+  "properties": {
+    "number_1": {
+      "type": "byte"
+    },
+    "number_2": {
+      "type": "byte"
+    },
+    "number_3": {
+      "type": "byte"
+    },
+    "number_4": {
+      "type": "byte"
+    },
+    "number_5": {
+      "type": "byte"
+    },
+    "star_1": {
+      "type" : "byte"
+    },
+    "star_2": {
+      "type" : "byte"
+    },
+    "number_of_winners" : {
+      "type" : "long"
+    },
+    "amount_won" : {
+      "type" : "long"
+    },
+    "date" : {
+      "type" : "date"
+    }
+  }
+}
