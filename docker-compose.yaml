@@ -1,27 +1,37 @@
-version: "3.0"
+version: "3.5"
+
 services:
-  lotto_analytics:
-    image: lotto_analytics
+  python:
+    container_name: lotto_analytics_python
+    build: './docker/python/'
     depends_on:
       - kibana
     networks:
-      - lotto_network
+      - backend
+    volumes:
+      - ./app/:/home/python_app/app/
   elasticsearch:
+    container_name: lotto_analytics_elasticsearch
     image: elasticsearch:7.3.1
     ports:
       - 9200:9200
     environment:
       - discovery.type=single-node
     networks:
-      - lotto_network
+      - backend
+      - frontend
   kibana:
+    container_name: lotto_analytics_kibana
     image: kibana:7.3.1
     depends_on:
       - elasticsearch
     ports:
       - 5601:5601
     networks:
-      - lotto_network
+      - frontend
 
 networks:
-  lotto_network:
+  backend:
+    name: lotto_analytics_back
+  frontend:
+    name: lotto_analytics
