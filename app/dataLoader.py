@@ -1,6 +1,7 @@
 # coding: utf-8
 
 from urllib.request import urlopen
+from urllib.error import URLError
 from datetime import datetime
 from bs4 import BeautifulSoup
 from elasticsearch import Elasticsearch
@@ -12,7 +13,6 @@ def parse_line(line):
     col = 1
 
     for td in line:
-        # TODO: make a switch => haha no switch in python
         value = td.string
         if col == 1:
             date = value.split()
@@ -65,18 +65,21 @@ years = (
     2019,
 )
 
-es = Elasticsearch()
+es = Elasticsearch([
+    {'host': 'lotto_analytics_elasticsearch', 'port': 9200}
+])
 
 for year in years:
 
     print('parsing year ' + str(year))
 
-    # specify the url
     quote_page = 'http://www.tirage-euromillions.net/euromillions/annees/annee-' + str(year) + '/'
 
-    # query the website and return the html to the variable ‘page’
-    # TODO: check query is OK
-    page = urlopen(quote_page)
+    try: page = urlopen(quote_page).read();
+    except URLError as e:
+        print(e.reason)
+    except URLError as e:
+        print(e.reason)
 
     soup = BeautifulSoup(page, 'html.parser')
 
