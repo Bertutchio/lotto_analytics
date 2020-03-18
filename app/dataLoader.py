@@ -75,7 +75,7 @@ for year in years:
 
     quote_page = 'http://www.tirage-euromillions.net/euromillions/annees/annee-' + str(year) + '/'
 
-    try: page = urlopen(quote_page).read();
+    try: page = urlopen(quote_page).read()
     except URLError as e:
         print(e.reason)
     except URLError as e:
