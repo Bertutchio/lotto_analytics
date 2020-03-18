@@ -36,7 +36,9 @@ RUN pip install -U pip \
 ## Production
 FROM base AS production
 
-RUN adduser --disabled-password python_app
+RUN addgroup -S python_app && \
+    adduser -H -S -G python_app python_app
+
 USER python_app
 
 COPY  --chown=python_app:python_app entrypoint.sh /
